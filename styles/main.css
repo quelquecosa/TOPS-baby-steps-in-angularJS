@@ -1,0 +1,95 @@
+body {
+	font-family:'Arial';
+}
+
+
+/*logo & SNS live in header*/
+header {
+	background-color: #333;
+}
+header *{
+	color: #bbb;
+	font-size: 1em;
+	font-family:'Dosis';
+	background-color: #333;
+}
+
+header > * {
+	padding: 20px 0;
+}
+
+header article{
+	text-align: center;
+	border-bottom:1px dotted #222;
+}
+
+header article > *{
+	display: inline;
+}
+
+/*logo*/
+header article p{
+	width:80%;
+	text-align: center;
+	font-size: 1.8em;
+}
+
+/*bolts*/
+header article img{
+	width: 25px;
+}
+#rightBolt{
+	margin-left: 7px;
+}
+#leftBolt{
+	margin-right: 6px;
+}
+
+/*SNS sources*/
+nav {
+    width: 100%;
+    margin-left: auto ;
+    margin-right: auto;
+}
+nav ul {
+    text-align: center;
+    overflow: hidden;
+}
+nav li{
+    padding: 2px;
+    width: 48%;
+    display:inline-block;
+}
+nav li:hover{
+	opacity: .8;
+}
+li img{
+	width: 20%;
+	min-width: 80px;
+}
+
+#vimeoLogo{
+	margin-bottom: 9px;
+}
+
+/*videos*/
+.content article{
+	text-align: center;
+	margin: 50px 0;
+}
+
+.content article p{
+	margin-bottom: 20px;
+}
+
+.content article iframe{
+	width: 100%;
+	max-width: 640px;
+	height: 320px;
+}
+
+
+
+
+
+

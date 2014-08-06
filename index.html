@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<!--
+
+	Hi, I will be guiding you today.
+	
+	- Read this HTML file as you would a regular html5 file.
+	- You will see some special attributes on some HTML elements.
+	- Use the glossary below to decipher them.
+	- Comments are your friends, read them too.
+	- Don't lose patience, focus.
+	
+	When you finish reading this file, move on to controller.js
+
+
+ANGULAR GLOSSARY:
+	ng-app: this tells angular what portion of the interface is controlled by angular
+	
+	ng-controller: this tells angular what portion of the interface within ng-app is managed by a specific controller. 
+	In this case, we only have one controller, it's called mainController.
+	
+	ng-show: this tells an angular controller if this element should be hidden or shown
+	
+	ng-click: this tells the angular controller to run a specific function when this HTML element is clicked
+	
+	ng-repeat: this is angular's way of displaying many of the same elements. in this case, all of our videos. 
+	Each <article> is one video.
+-->
+
+
+<!-- ng-app tells angular the bounds of our app in our html file-->
+<!-- angular will work within the ng-app bounds-->
+<html ng-app>
+
+	<head>
+		<title>T O P S</title>
+		
+		<!--bring in css styles-->
+		<link rel="stylesheet" type="text/css" href="styles/reset.css">
+		<link rel="stylesheet" type="text/css" href="styles/main.css">
+		<link rel="stylesheet" type="text/css" href="styles/spinner.css">
+		
+		<!--bring in fonts from google API-->
+		<link href='http://fonts.googleapis.com/css?family=Dosis|Poiret+One|Megrim' rel='stylesheet' type='text/css'>
+		
+		<!--sets no zoom and no bottom bar for mobile-->
+		<meta name="viewport" content="minimal-ui width=device-width, initial-scale=1"/> 
+	</head>
+	
+
+	<!--ng-controller tells angular what part of the interface will be controlled by which controller-->
+	<!--in this app we only have one controller (named mainController):-->
+	<body ng-controller='mainController'>
+		
+		<!--loading spinner-->
+		<!--if ng-show ==true, the section is shown.-->
+		<!--if ng-show == false, the section is hidden. -->
+		<!--showSpinner is defined in controller.js-->
+		<div id="spinnerContainer" ng-show="showSpinner">
+			<div class="spinner"></div>
+		</div>		
+		
+		<!-- when showSpinner is set to true, we dont show this section -->
+		<span ng-show="!showSpinner">
+			<header>
+				<!--logo-->
+				<article id="logo">
+					<img id="leftBolt" src='img/bolt.png'/>
+					<p>T O P S</p>
+					<img id="rightBolt" src='img/bolt.png'/>
+				</article>
+				
+				<!--navigation bar-->
+				<nav>
+					<ul>	
+						<li ng-click="getYouTube()">
+							<img src='img/youtubeLogo.svg'/>
+						</li>		
+						<li ng-click="getVimeo()">
+							<img id="vimeoLogo" src='img/vimeoLogo.svg'/>
+						</li>		
+					</ul>
+				</nav>
+			</header>
+	
+			<!--videos go in here-->
+			<section class="content">
+				<!--
+				- ng-repeat is similar to a forEach loop
+				- the object videos is defined in the controller.js file as $scope.videos
+				- video refers to each [n] inside of $scope.videos, hence "video"
+				- each video has a title and a URL
+				- 
+				-->
+				<article ng-repeat="video in videos">
+					<!-- here's how these {{ }} work:
+							
+							$scope.x="hello motto" (this would be defined in the controller.js file)
+							
+							if i write {{x}} in the index.html, angular will render it as "hello motto"
+					-->
+					<p>{{video.title}}</p>
+					<iframe ng-src={{video.URL}}></iframe>								
+				</article>
+			</section>
+			
+		</span>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<script src="controller.js"></script>
+	</body>
+</html>

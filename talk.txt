@@ -1,0 +1,114 @@
+Hello everyone.
+
+
+My name is Isaac Malca, and I am a software developer with a background in business administration. I got into Angular because programming dynamic interfaces with jQuery became a pain.
+
+For those of you who are completely clueless about AngularJS, AngularJS is a front end framework that makes front end development much more efficient. It was conceptualized and created at Google, after the devs of GMail and other google apps realized the existing solutions were just too exhausting.
+
+
+
+Today, we will get our hands dirty with AngularJS. I have created a really, really simple angular website. I want us to go over it together, line by line, and explain what every piece of code does.
+
+This website I built for today is called TOPS. TOPS allows the user to see the coolest videos from youTube, and from vimeo. You can see it at www.isaacmalca.com/tops, let's check it out and see what it does: (go to web).
+
+
+
+
+Let's start by looking at our file structure:
+- index.html for our interface structure
+- the styles folder for our css
+- an img folder
+- a js file for interactions and logic
+
+So far, this looks like a "normal" website, doesnt it? Does anyone have any questions so far? Does this make sense to everyone?
+
+
+
+Ok, let's start by looking into the index.html file, line by line.
+There are some things that might not be familiar to you, let's explain each of them. Please raise your hand when we get to something you dont understand. ((Isaac go over each line))
+
+	ng-app: this tells angular what portion of the interface is controlled by angular
+	
+	ng-controller: this tells angular what portion of the interface within ng-app is managed by a specific controller. 
+	An angular project is usually comprised of many controllers. Each controller controls a different part of the interface.
+	In this case, we only have one controller, it's called mainController.
+	
+	ng-show: this tells an angular controller if this section should be hidden or shown
+	
+	ng-click: this tells the angular controller to run a specific function when this HTML element is clicked
+	
+	ng-repeat: this is angular's way of displaying many of the same elements. in this case, all of our videos. 
+	Each <article> is one video.
+	
+	
+	
+OK. now that we've gone through the interface, lets look at the logic. ((Open in tuxedo mode, so we can see index on one page, and controller in another))
+
+The first thing we do, is declare our controller called mainController. I could've chosen any name. You'll see that we're passing in some objects along with our declaration. Let's go over these:
+
+	*what is the $scope object? 
+		- the glue between the interface and the logic
+		- an object in the controller that can be accessed live by the interface (index.html)
+		- we'll see how its used in a second
+
+		
+	*what is the $http object? 
+		an object with methods that allow us to connect to API's from within this controller
+		we'll see how its used in a second
+		
+	*what is the $timeout object? 
+		it works exactly the same as JS's setTimeout, it is just built specifically for Angular
+		
+		works like this:
+		
+		$timeout(function() {
+			console.log('3 seconds have passed');
+		}, 3000);
+
+
+
+Ok, so we said $scope is the glue between our interface and our logic. Let's see why.
+
+The first line in our controller says: $scope.showSpinner = false; Let's look at our interface and see where this is reflected. (show them). 
+Take a look at our spinner in the interface. it says: ng-show="showSpinner". In angular, this means that when the variable showSpinner equals false, the spinner will be hidden. What happens when the variable showSpinner goes to true?
+THIS IS A CRITICAL PART OF ANGULAR. PLEASE, I IMPLORE YOU, RAISE YOUR HAND IF YOU DONT UNDERSTAND WHAT I HAVE JUST SHOWN YOU. ARE YOU SURE?
+Realize that we dont need to say $scope.showSpinner in the interface. Angular understands, so we can just say showSpinner.
+
+
+
+Ok, let's keep moving down our code.
+
+Let's look at a function declaration: $scope.getYouTube = function(){
+1. the first thing this function does is show the spinner. Who can tell me where that is happening?
+2. The next thing we do is use the $http object to make a get request to the youtube API. If you've used jQuery, this is similar to $.get with a callback
+3. Lets take a look at our console to see what the youtubeAPI returns to us: (look at inspector, unfold, explain how you will create iframe)
+4. remember how i told you we would structure our model? In order for our model to look like this (point to it), we need to "massage" the youtubeAPI data a little. When we're done massaging it, it looks like this (look at inspector).
+
+
+4. Let's go to our interface and see what triggered this function getYoutube(). Can anyone tell me? Show me?
+Let's look at our interface to see how this happens: (look at ng-click="getYoutube()"). In Angular, this reads, "when this li is clicked, run the function getYoutube() from our controller". 
+Realize that we dont need to say $scope.getYoutube() in the interface. Angular understands, so we can just say getYoutube().
+
+
+5. Now let's take a look at where our videos are being populated and how. We have 'video in videos'. That means for every video in the video array (show them the array in the controller), do the following:
+6. So we're gona display first the video's title, and then the video URL in an iframe so that we can watch it.
+7. Done
+8. Ok, lets look at it again, from the top:
+- ng-click activates our getYoutube function
+- getYoutube populates the model
+- Angular displays the items in the model how we told it to, using ng-repeat
+
+
+
+Who wants to run me through the next function? Someone who's never used Angular before…
+
+How does it get activated?
+
+
+Questions…ANYONE? Shall we go through it again?
+
+
+Thanks for coming. I hope this was helpful!
+You can download the source code at: www.isaacmalca.com/tops.zip
+
+
